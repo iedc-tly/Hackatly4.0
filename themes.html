@@ -16,6 +16,244 @@
     <link rel="website icon" href="assets/logo.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="script.js" defer></script>
+
+    <style>
+        /* ---- Problem Statement Modal Enhancements ---- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 0;
+            border-radius: 20px;
+            width: 92%;
+            max-width: 720px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+            animation: modalSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(0, 60, 60, 0.2);
+            border-radius: 3px;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(30px) scale(0.97);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, #003c3c 0%, #005a5a 100%);
+            padding: 2rem 2.5rem;
+            border-radius: 20px 20px 0 0;
+            z-index: 1;
+        }
+
+        .modal-header h2 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .modal-header .modal-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.3rem;
+            font-weight: 400;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 2;
+        }
+
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 1.5rem 2.5rem 2.5rem;
+        }
+
+        .ps-card {
+            background: #f8fafa;
+            border: 1px solid rgba(0, 60, 60, 0.08);
+            border-radius: 14px;
+            padding: 1.5rem 1.8rem;
+            margin-bottom: 1.2rem;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .ps-card:hover {
+            border-color: rgba(0, 60, 60, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 60, 60, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .ps-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .ps-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #003c3c, #00695c);
+            color: #ffffff;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .ps-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1a1b26;
+            margin-bottom: 0.6rem;
+            line-height: 1.35;
+        }
+
+        .ps-description {
+            font-size: 0.92rem;
+            color: #4a5568;
+            line-height: 1.65;
+            font-weight: 400;
+        }
+
+        /* Theme card hover enhancement for clickability */
+        .theme-card {
+            position: relative;
+            transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .theme-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 60, 60, 0.12);
+        }
+
+        .theme-card .theme-content {
+            padding-bottom: 2.8rem;
+        }
+
+        .theme-card::after {
+            content: 'View Problem Statements →';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #003c3c, #005a5a);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.25s ease;
+        }
+
+        .theme-card:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 96%;
+                max-height: 90vh;
+                border-radius: 16px;
+            }
+
+            .modal-header {
+                padding: 1.5rem 1.5rem;
+                border-radius: 16px 16px 0 0;
+            }
+
+            .modal-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .modal-body {
+                padding: 1rem 1.5rem 1.5rem;
+            }
+
+            .ps-card {
+                padding: 1.2rem 1.4rem;
+            }
+
+            .theme-card::after {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -49,13 +287,15 @@
                         <a href="faq.html" class="navlink">FAQ</a>
                     </div>
                     <div class="navbar-cta-mobile">
-                        <a href="https://iedctly.in/" class="primary-button-link">IEDC TLY</a>
+                        <a href="https://sites.google.com/view/iedcetly/home?authuser=0"
+                            class="primary-button-link">IEDC TLY</a>
                     </div>
                 </nav>
 
                 <div class="desktop-cta">
                     <button class="primary-button">
-                        <div class="registor"><a href="https://iedctly.in/">IEDC TLY</a></div>
+                        <div class="registor"><a href="https://sites.google.com/view/iedcetly/home?authuser=0">IEDC
+                                TLY</a></div>
                     </button>
                 </div>
             </div>
@@ -68,7 +308,7 @@
 
                 <div class="themes-grid">
                     <!-- Robotics -->
-                    <div class="theme-card">
+                    <div class="theme-card" data-theme="robotics" onclick="openThemeModal('robotics')">
                         <div class="theme-image">
                             <img src="./assets/robotics.png" alt="Robotics">
                         </div>
@@ -81,7 +321,7 @@
                     </div>
 
                     <!-- Tourism -->
-                    <div class="theme-card">
+                    <div class="theme-card" data-theme="tourism" onclick="openThemeModal('tourism')">
                         <div class="theme-image">
                             <img src="./assets/tourism2.jpeg" alt="Tourism">
                         </div>
@@ -92,7 +332,7 @@
                     </div>
 
                     <!-- Smart Vehicle -->
-                    <div class="theme-card">
+                    <div class="theme-card" data-theme="smart-vehicles" onclick="openThemeModal('smart-vehicles')">
                         <div class="theme-image">
                             <img src="./assets/vehicle.png" alt="Smart Vehicle">
                         </div>
@@ -102,19 +342,20 @@
                         </div>
                     </div>
 
-                    <!-- Energy -->
-                    <div class="theme-card">
+                    <!-- Sustainable Energy -->
+                    <div class="theme-card" data-theme="sustainable-energy"
+                        onclick="openThemeModal('sustainable-energy')">
                         <div class="theme-image">
-                            <img src="./assets/greentech.png" alt="Energy">
+                            <img src="./assets/greentech.png" alt="Sustainable Energy">
                         </div>
                         <div class="theme-content">
-                            <h3>Energy and Environment</h3>
-                            <p>Sustainable solutions for resource conservation & waste management.</p>
+                            <h3>Sustainable Energy</h3>
+                            <p>Sustainable solutions for resource conservation & clean energy adoption.</p>
                         </div>
                     </div>
 
                     <!-- Fitness -->
-                    <div class="theme-card">
+                    <div class="theme-card" data-theme="fitness" onclick="openThemeModal('fitness')">
                         <div class="theme-image">
                             <img src="./assets/fitness.jpg" alt="Fitness">
                         </div>
@@ -125,7 +366,7 @@
                     </div>
 
                     <!-- Med-Tech -->
-                    <div class="theme-card">
+                    <div class="theme-card" data-theme="medtech" onclick="openThemeModal('medtech')">
                         <div class="theme-image">
                             <img src="./assets/medtech.jpg" alt="Med-Tech">
                         </div>
@@ -136,7 +377,7 @@
                     </div>
 
                     <!-- Agriculture -->
-                    <div class="theme-card">
+                    <div class="theme-card" data-theme="agriculture" onclick="openThemeModal('agriculture')">
                         <div class="theme-image">
                             <img src="./assets/agriculture.jpg" alt="Agriculture">
                         </div>
@@ -146,30 +387,30 @@
                         </div>
                     </div>
 
-                    <!-- Cybersecurity -->
-                    <div class="theme-card">
+                    <!-- Green Technology -->
+                    <div class="theme-card" data-theme="green-technology" onclick="openThemeModal('green-technology')">
                         <div class="theme-image">
-                            <img src="./assets/cybersecurity.jpg" alt="Cybersecurity">
+                            <img src="./assets/theme_green_tech.png" alt="Green Technology">
                         </div>
                         <div class="theme-content">
-                            <h3>Cybersecurity</h3>
-                            <p>Safeguard digital infrastructure against emerging threats.</p>
+                            <h3>Green Technology</h3>
+                            <p>Driving sustainability through innovative eco-friendly solutions.</p>
                         </div>
                     </div>
 
-                    <!-- Disaster Management -->
-                    <div class="theme-card">
+                    <!-- Smart Automation -->
+                    <div class="theme-card" data-theme="smart-automation" onclick="openThemeModal('smart-automation')">
                         <div class="theme-image">
-                            <img src="./assets/disaster.jpg" alt="Disaster Management">
+                            <img src="./assets/theme_smart_automation.png" alt="Smart Automation">
                         </div>
                         <div class="theme-content">
-                            <h3>Disaster Management</h3>
-                            <p>Prepare, respond, and recover effectively from emergencies.</p>
+                            <h3>Smart Automation</h3>
+                            <p>Automate everyday life with intelligent systems & IoT solutions.</p>
                         </div>
                     </div>
 
                     <!-- Education -->
-                    <div class="theme-card">
+                    <div class="theme-card" data-theme="education" onclick="openThemeModal('education')">
                         <div class="theme-image">
                             <img src="./assets/education.jpg" alt="Education">
                         </div>
@@ -182,10 +423,17 @@
             </div>
         </section>
 
-        <!-- Theme Popup Modal -->
-        <div id="popupModal" class="modal" style="display: none;">
+        <!-- Theme Problem Statement Modal -->
+        <div id="popupModal" class="modal">
             <div class="modal-content">
-                <span class="close-button">&times;</span>
+                <button class="close-button" onclick="closeThemeModal()">&times;</button>
+                <div class="modal-header">
+                    <h2 id="modalThemeTitle"></h2>
+                    <p class="modal-subtitle">Problem Statements</p>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Problem statements will be injected here -->
+                </div>
             </div>
         </div>
 
@@ -204,6 +452,8 @@
                     </p>
                     <a href="mailto:iedc@cethalassery.ac.in" class="primary-button-link"
                         style="margin-top: 1rem; display: inline-block;">Email Us</a>
+                    <a href="mailto:iedc@cethalassery.ac.in"
+                        style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.85rem; display: inline-block; text-decoration: none;">iedc@cethalassery.ac.in</a>
                 </div>
                 <div class="footer-col">
                     <h3>Quick Links</h3>
@@ -218,21 +468,12 @@
                 <div class="footer-col">
                     <h3>Contact Us</h3>
                     <div style="color: var(--text-muted); margin-bottom: 1rem;">
-                        <p><strong>Sidharth (CEO):</strong> 9074961060</p>
-                        <p><strong>Adithya (CMO):</strong> 8590801366</p>
+                        <p><strong>Pournami E K (CEO):</strong> 9074961060</p>
+                        <p><strong>Abhilash C K (COO):</strong> 8590801366</p>
                     </div>
-                    <h3>Location</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 0.5rem;">College of Engineering Thalassery</p>
-                    <a href="https://www.google.com/maps/place/College+of+Engineering+Thalassery/@11.7827642,75.5127451,17z"
-                        target="_blank"
-                        style="color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                        <img src="./assets/icons8-google-maps-50.png" alt="Map" style="height: 20px;">
-                        View on Map
-                    </a>
-                </div>
-                <div class="footer-col">
+                    <br>
                     <h3>Follow Us</h3>
-                    <div class="social-links" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                    <div class="social-links" style="display: flex; gap: 1rem;">
                         <a href="https://www.instagram.com/iedc_cetly/" target="_blank"><img
                                 src="./assets/social link (1).png" alt="Instagram" style="height: 30px;"></a>
                         <a href="https://www.linkedin.com/company/iedc-tly/mycompany/" target="_blank"><img
@@ -243,13 +484,255 @@
                                 style="height: 30px;"></a>
                     </div>
                 </div>
+                <div class="footer-col">
+                    <h3>Location</h3>
+                    <h3 style="color: var(--text-muted); margin-bottom: 0 rem;">College of Engineering Thalassery</h3>
+                    <a href="https://www.google.com/maps/place/College+of+Engineering+Thalassery/@11.7827642,75.5127451,17z"
+                        target="_blank"
+                        style="color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <img src="./assets/icons8-google-maps-50.png" alt="Map" style="height: 20px;">
+                        View on Map
+                    </a>
+                </div>
             </div>
             <div
                 style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
-                &copy; 2024 IEDC TLY. All rights reserved.
+                &copy; 2026 IEDC TLY. All rights reserved.
             </div>
         </footer>
     </div>
+
+    <script>
+        // ===== Problem Statements Data (extracted from docx files) =====
+        const themeProblemStatements = {
+            "robotics": {
+                title: "Robotics",
+                problems: [
+                    {
+                        title: "Simplifying PID Tuning in Robotics",
+                        description: "Manual PID tuning in robotic systems is often time-consuming, difficult, and dependent on repeated trial-and-error as well as expert experience, resulting in instability and inefficient performance. Develop a simplified and user-friendly approach to make PID tuning more consistent, reliable, and accessible."
+                    },
+                    {
+                        title: "Simplifying Robot Localization and Mapping",
+                        description: "Robot localization and mapping are complex tasks that rely on advanced algorithms, making them difficult for beginners to understand and implement. Develop a simplified framework that makes these processes more accessible for student-level robots performing basic indoor navigation."
+                    },
+                    {
+                        title: "Cost Barriers in Robotics Hardware",
+                        description: "The high cost of LiDAR sensors, precision motors, and control hardware limits accessibility to robotics development for students, beginners and small institutions. Develop a cost-effective hardware framework for beginner-level robotic platforms."
+                    }
+                ]
+            },
+            "tourism": {
+                title: "Tourism",
+                problems: [
+                    {
+                        title: "AI-Based Personalized Travel Planner",
+                        description: "Develop an AI-based personalized travel planner that generates optimized travel itineraries based on user preferences, budget, duration, and real-time local conditions. The system should recommend destinations, activities, and transportation options while ensuring cost-efficiency and time optimization."
+                    },
+                    {
+                        title: "Multilingual AI Tourist Assistant",
+                        description: "Build a multilingual AI assistant that enables tourists to communicate effectively in local languages, navigate unfamiliar environments, and access essential services such as hospitals, police stations, transport, and restaurants. The solution should prioritize ease of use and functionality even in low-network conditions."
+                    },
+                    {
+                        title: "Intelligent Local Experience & Community Integration Platform",
+                        description: "Create an AI-driven platform that connects tourists with verified local experiences, cultural activities, and community-led services. The system should recommend personalized local engagements while promoting small businesses and sustainable economic growth within the region."
+                    }
+                ]
+            },
+            "smart-vehicles": {
+                title: "Smart Vehicles",
+                problems: [
+                    {
+                        title: "Quality Control of Products",
+                        description: "Smart vehicles require exceptional dependability and overall excellence. Testing sensor, circuit, software is a must. It may be hard to detect defects."
+                    },
+                    {
+                        title: "Problem with Supply Chains",
+                        description: "Microchips, sensors, and electronics needed for smart vehicles. A hold-up in supply can halt production. Material availability should be managed by engineers."
+                    },
+                    {
+                        title: "A Lack of Skilled Labor",
+                        description: "Workers must be well versed in electronics and automation. The number of skilled workers may be limited. Training employees is expensive and time-consuming."
+                    }
+                ]
+            },
+            "sustainable-energy": {
+                title: "Sustainable Energy",
+                problems: [
+                    {
+                        title: "Smart Energy Consumption Monitoring",
+                        description: "Develop a smart system that monitors electricity usage in homes and institutions to reduce energy wastage. The solution should provide real-time feedback, encourage efficient consumption habits, and help consumers optimize power usage."
+                    },
+                    {
+                        title: "Renewable Energy Integration for Stable Power Supply",
+                        description: "Design solutions that support the integration of solar and other renewable energy sources into existing KSEB power networks. The aim is to manage power fluctuations, improve grid reliability, and ensure uninterrupted electricity supply."
+                    },
+                    {
+                        title: "Community-Based Sustainable Energy Solutions",
+                        description: "Create localized renewable energy models such as rooftop solar or microgrid systems that support sustainable power generation at the community level. The focus is to reduce dependence on conventional energy and promote clean energy adoption."
+                    }
+                ]
+            },
+            "fitness": {
+                title: "Fitness",
+                problems: [
+                    {
+                        title: "Smart Fitness Injury Prevention",
+                        description: "Create cutting-edge solutions that monitor exercise form in real-time using AI, sensors, or camera-based technology. Provide instant corrective feedback to prevent injuries, making workouts safe and effective for users of all levels."
+                    },
+                    {
+                        title: "Personalized Adaptive Fitness Coach",
+                        description: "Develop innovative solutions that adapt workouts dynamically based on user performance, heart rate, and energy levels. Leverage AI and smart tracking to deliver personalized, goal-oriented fitness routines tailored to each individual."
+                    },
+                    {
+                        title: "Fitness Motivation & Habit Builder",
+                        description: "Design engaging solutions that turn fitness into a sustainable habit by tracking achievements, sending motivational nudges, and gamifying progress. Encourage consistency and make healthy routines a lasting part of everyday life."
+                    }
+                ]
+            },
+            "medtech": {
+                title: "Med-Tech",
+                problems: [
+                    {
+                        title: "Early Disease Detection",
+                        description: "Develop intelligent solutions that enable early identification of diseases using AI, wearable data, and predictive analytics. The goal is to support timely intervention and improve patient outcomes."
+                    },
+                    {
+                        title: "Virtual or Smart Consultation Facilities",
+                        description: "Create secure and scalable virtual consultation platforms that enhance real-time doctor–patient interaction and accessibility. Focus on improving healthcare reach while reducing delays and inefficiencies."
+                    },
+                    {
+                        title: "Testing Accuracy of Reports",
+                        description: "Design innovative systems that improve the reliability and precision of diagnostic reports through AI validation and automated quality checks. The aim is to minimize errors and strengthen trust in medical testing."
+                    }
+                ]
+            },
+            "agriculture": {
+                title: "Agriculture",
+                problems: [
+                    {
+                        title: "Mitigation of Crop Damage by Wildlife Intrusions",
+                        description: "Farmers in high-risk regions are currently facing over 35% crop loss due to frequent attacks by wild animals like wild boars, neel gai, and deer. Traditional protection methods are either inhumane or largely ineffective, creating a critical need for an affordable, smart detection and deterrent system. The challenge is to build an AI or IoT-based solution that can monitor farm perimeters in real-time and use non-harmful deterrents to protect livelihoods without damaging local ecosystems."
+                    },
+                    {
+                        title: "Early Warning System for Pest and Pathogen Management",
+                        description: "Reactive pest control measures lead to a 40% loss in potential food production annually because farmers lack the technology to identify threats before they become uncontrollable. There is a specific requirement for a predictive model that can forecast pest, disease, and insect attacks at least 15 days in advance. The goal is to provide farm-level prescriptive guidance that allows farmers to take immediate action, reducing chemical dependency and saving crop yields."
+                    },
+                    {
+                        title: "Adaptive Framework for Climate-Induced Crop Failures",
+                        description: "Unpredictable weather patterns, including unseasonal rainfall, extreme heat waves, and floods, have damaged nearly 33.9 million hectares of Indian farmland in recent years. Farmers are often left vulnerable because they lack hyper-local, actionable data to pivot their operations during sudden weather shifts. This challenge focuses on developing a decision-support platform that uses real-time weather analytics to provide adaptive farming strategies, preventing total harvest loss during climate calamities."
+                    }
+                ]
+            },
+            "green-technology": {
+                title: "Green Technology",
+                problems: [
+                    {
+                        title: "Intelligent Water Security System",
+                        description: "Design a smart water management solution that ensures efficient usage, leakage detection and waste water reuse in urban residential communities."
+                    },
+                    {
+                        title: "Urban Mine Explorer",
+                        description: "Design a data-driven platform to identify and recover critical minerals (Lithium, Cobalt, Gold) from local e-waste \"hotspots\" like campus dorms or corporate offices."
+                    },
+                    {
+                        title: "Green Delivery: The Cleanest Path",
+                        description: "Most delivery apps only look for the fastest route, which often wastes fuel in heavy traffic. Build a tool that finds the greenest path by avoiding hills and traffic jams to save fuel. Your goal is to show how much CO₂ a delivery driver can save just by changing their route."
+                    }
+                ]
+            },
+            "smart-automation": {
+                title: "Smart Automation",
+                problems: [
+                    {
+                        title: "Elderly Home Safety",
+                        description: "Design a system to detect falls and alert caregivers using everyday sensors, ensuring privacy and false alarm prevention."
+                    },
+                    {
+                        title: "Energy Optimization",
+                        description: "Create an intuitive interface for smart appliances that predicts and reduces household energy waste during peak hours."
+                    },
+                    {
+                        title: "Urban Waste Reduction",
+                        description: "Develop smart bin sensors and scheduling that integrate with municipal trucks to minimize overflow and optimize collection routes."
+                    }
+                ]
+            },
+            "education": {
+                title: "Education",
+                problems: [
+                    {
+                        title: "Cognitive Learner Challenge",
+                        description: "There is no reliable way to understand a learner's daily engagement, cognitive load, and educational progress without overwhelming them or draining their mental capacity—particularly for specific age groups that require structure without stimulation overload. Create a dedicated, hardware-integrated environment that acts as a cognitive partner—monitoring a learner's physical and mental state to optimize \"Deep Work\" while strictly filtering the noise of the digital age."
+                    },
+                    {
+                        title: "The Parent–Learner Guidance Disconnect",
+                        description: "Parents and guardians play a crucial role in a learner's development, yet they often lack clear, personalized insight into a child's strengths, weaknesses, and growth trajectory. Existing guidance is generic, fragmented, or reactive, making it difficult to provide structured support across academics, life skills, and long-term development—especially in home-schooling or non-traditional learning environments."
+                    },
+                    {
+                        title: "The Co-Curricular Discovery Blueprint",
+                        description: "Many learners struggle to discover and pursue suitable co-curricular pathways such as arts, sports, or research due to a lack of personalized mapping based on individual traits, physical considerations, interests, and local opportunities. As a result, talent remains underdeveloped, misdirected, or entirely undiscovered. Develop a model that maps a learner's unique physical, geographical, and cognitive profile to specialized fields in arts, sports, and R&D."
+                    }
+                ]
+            }
+        };
+
+        // ===== Modal Functions =====
+        function openThemeModal(themeKey) {
+            const data = themeProblemStatements[themeKey];
+            if (!data) return;
+
+            const modal = document.getElementById('popupModal');
+            const titleEl = document.getElementById('modalThemeTitle');
+            const bodyEl = document.getElementById('modalBody');
+
+            titleEl.textContent = data.title;
+
+            let html = '';
+            data.problems.forEach((ps, index) => {
+                html += `
+                    <div class="ps-card">
+                        <div class="ps-number">${index + 1}</div>
+                        <div class="ps-title">${ps.title}</div>
+                        <p class="ps-description">${ps.description}</p>
+                    </div>
+                `;
+            });
+
+            bodyEl.innerHTML = html;
+
+            modal.style.display = 'flex';
+            // Trigger animation
+            requestAnimationFrame(() => {
+                modal.classList.add('show');
+            });
+
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeThemeModal() {
+            const modal = document.getElementById('popupModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('popupModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeThemeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeThemeModal();
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -283,9 +283,9 @@ img {
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.45) 50%,
-      rgba(0, 0, 0, 0.6) 100%);
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.7) 100%);
   z-index: 2;
 }
 
@@ -334,11 +334,12 @@ img {
 .hero-content .subtitle {
   font-family: var(--font-display);
   font-size: 1.15rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 2.5rem;
   letter-spacing: 0.01em;
   line-height: 1.6;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .hero-content .primary-button {
@@ -463,12 +464,17 @@ img {
   height: 200px;
   overflow: hidden;
   position: relative;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .theme-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .theme-content {
@@ -606,7 +612,7 @@ img {
 
 .footer-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 2rem;
   text-align: left;
 }
@@ -735,6 +741,10 @@ img {
 @media (max-width: 768px) {
   :root {
     --header-height: 70px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
   }
 
   .mobile-menu-toggle {
