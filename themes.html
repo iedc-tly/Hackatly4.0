@@ -224,6 +224,66 @@
             transform: translateY(0);
         }
 
+        /* ---- Category Tabs Enhancements ---- */
+        .theme-tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .theme-tab {
+            background: rgba(0, 60, 60, 0.05);
+            border: 1px solid rgba(0, 60, 60, 0.1);
+            color: #003c3c;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-tab:hover {
+            background: rgba(0, 60, 60, 0.1);
+        }
+
+        .theme-tab.active {
+            background: linear-gradient(135deg, #003c3c, #005a5a);
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(0, 60, 60, 0.2);
+        }
+
+        .empty-state-message {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #ffffff;
+            border: 1px dashed rgba(0, 60, 60, 0.2);
+            border-radius: 14px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .empty-state-message i {
+            font-size: 3.5rem;
+            color: rgba(0, 60, 60, 0.4);
+            margin-bottom: 1.2rem;
+        }
+
+        .empty-state-message h3 {
+            font-family: 'DM Sans', sans-serif;
+            color: #1a1b26;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .empty-state-message p {
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+
         @media (max-width: 768px) {
             .modal-content {
                 width: 96%;
@@ -304,119 +364,257 @@
         <!-- THEMES SECTION -->
         <section class="page-section themes-section" id="themes">
             <div class="container">
-                <h2 class="section-title">Themes for Hackatly-24</h2>
+                <h2 class="section-title">Themes for Hackatly 4.0</h2>
 
-                <div class="themes-grid">
-                    <!-- Robotics -->
-                    <div class="theme-card" data-theme="robotics" onclick="openThemeModal('robotics')">
-                        <div class="theme-image">
-                            <img src="./assets/robotics.png" alt="Robotics">
+                <!-- Category Tabs -->
+                <div class="theme-tabs-container">
+                    <button class="theme-tab active" onclick="switchThemeCategory(event, 'hardware')">Hardware</button>
+                    <button class="theme-tab" onclick="switchThemeCategory(event, 'software')">Software</button>
+                </div>
+
+                <!-- Hardware Section -->
+                <div id="hardware-section" class="category-section active">
+                    <div class="themes-grid">
+                        <!-- Robotics -->
+                        <div class="theme-card" data-theme="robotics" onclick="openThemeModal('robotics')">
+                            <div class="theme-image">
+                                <img src="./assets/robotics.png" alt="Robotics">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Robotics</h3>
+                                <p>Push boundaries with intelligent, versatile machines.</p>
+                                <p style="font-size: 0.85rem; opacity: 0.8;">Avg. Innovation in interaction, AI, and
+                                    automation.</p>
+                            </div>
                         </div>
-                        <div class="theme-content">
-                            <h3>Robotics</h3>
-                            <p>Push boundaries with intelligent, versatile machines.</p>
-                            <p style="font-size: 0.85rem; opacity: 0.8;">Avg. Innovation in interaction, AI, and
-                                automation.</p>
+
+                        <!-- Tourism -->
+                        <div class="theme-card" data-theme="tourism" onclick="openThemeModal('tourism')">
+                            <div class="theme-image">
+                                <img src="./assets/tourism2.jpeg" alt="Tourism">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Tourism</h3>
+                                <p>Transform travel with smart destinations & immersive experiences.</p>
+                            </div>
+                        </div>
+
+                        <!-- Smart Vehicle -->
+                        <div class="theme-card" data-theme="smart-vehicles" onclick="openThemeModal('smart-vehicles')">
+                            <div class="theme-image">
+                                <img src="./assets/vehicle.png" alt="Smart Vehicle">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Smart Vehicle</h3>
+                                <p>Enhance safety, efficiency, and connectivity in transportation.</p>
+                            </div>
+                        </div>
+
+                        <!-- Sustainable Energy -->
+                        <div class="theme-card" data-theme="sustainable-energy"
+                            onclick="openThemeModal('sustainable-energy')">
+                            <div class="theme-image">
+                                <img src="./assets/greentech.png" alt="Sustainable Energy">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Sustainable Energy</h3>
+                                <p>Sustainable solutions for resource conservation & clean energy adoption.</p>
+                            </div>
+                        </div>
+
+                        <!-- Fitness -->
+                        <div class="theme-card" data-theme="fitness" onclick="openThemeModal('fitness')">
+                            <div class="theme-image">
+                                <img src="./assets/fitness.jpg" alt="Fitness">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Fitness</h3>
+                                <p>Innovate health tech to encourage physical activity & well-being.</p>
+                            </div>
+                        </div>
+
+                        <!-- Med-Tech -->
+                        <div class="theme-card" data-theme="medtech" onclick="openThemeModal('medtech')">
+                            <div class="theme-image">
+                                <img src="./assets/medtech.jpg" alt="Med-Tech">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Med-Tech</h3>
+                                <p>Improve patient care with advanced diagnostic & treatment tools.</p>
+                            </div>
+                        </div>
+
+                        <!-- Agriculture -->
+                        <div class="theme-card" data-theme="agriculture" onclick="openThemeModal('agriculture')">
+                            <div class="theme-image">
+                                <img src="./assets/agriculture.jpg" alt="Agriculture">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Agriculture</h3>
+                                <p>Revolutionize farming for food security & precision management.</p>
+                            </div>
+                        </div>
+
+                        <!-- Green Technology -->
+                        <div class="theme-card" data-theme="green-technology"
+                            onclick="openThemeModal('green-technology')">
+                            <div class="theme-image">
+                                <img src="./assets/theme_green_tech.png" alt="Green Technology">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Green Technology</h3>
+                                <p>Driving sustainability through innovative eco-friendly solutions.</p>
+                            </div>
+                        </div>
+
+                        <!-- Smart Automation -->
+                        <div class="theme-card" data-theme="smart-automation"
+                            onclick="openThemeModal('smart-automation')">
+                            <div class="theme-image">
+                                <img src="./assets/theme_smart_automation.png" alt="Smart Automation">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Smart Automation</h3>
+                                <p>Automate everyday life with intelligent systems & IoT solutions.</p>
+                            </div>
+                        </div>
+
+                        <!-- Education -->
+                        <div class="theme-card" data-theme="education" onclick="openThemeModal('education')">
+                            <div class="theme-image">
+                                <img src="./assets/education.jpg" alt="Education">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Education</h3>
+                                <p>Enhance learning experiences with accessible tech-driven solutions.</p>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Tourism -->
-                    <div class="theme-card" data-theme="tourism" onclick="openThemeModal('tourism')">
-                        <div class="theme-image">
-                            <img src="./assets/tourism2.jpeg" alt="Tourism">
-                        </div>
-                        <div class="theme-content">
-                            <h3>Tourism</h3>
-                            <p>Transform travel with smart destinations & immersive experiences.</p>
-                        </div>
+                <!-- Software Section -->
+                <div id="software-section" class="category-section" style="display: none;">
+                    <div class="header-notification text-center"
+                        style="max-width: 800px; margin: 0 auto 2.5rem; background: rgba(0,229,195,0.08); border: 1px solid rgba(0,229,195,0.3); padding: 1.2rem; border-radius: 8px;">
+                        <p style="color: var(--text-muted); font-size: 1.05rem; margin: 0;">
+                            These are temporary problem statements for the selection process. <br>
+                            <strong>Actual problem statements will be provided at the day of the event.</strong>
+                        </p>
                     </div>
+                    <div class="themes-grid">
+                        <!-- Robotics -->
+                        <div class="theme-card" data-theme="robotics" onclick="openThemeModal('robotics')">
+                            <div class="theme-image">
+                                <img src="./assets/robotics.png" alt="Robotics">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Robotics</h3>
+                                <p>Push boundaries with intelligent, versatile machines.</p>
+                                <p style="font-size: 0.85rem; opacity: 0.8;">Avg. Innovation in interaction, AI, and
+                                    automation.</p>
+                            </div>
+                        </div>
 
-                    <!-- Smart Vehicle -->
-                    <div class="theme-card" data-theme="smart-vehicles" onclick="openThemeModal('smart-vehicles')">
-                        <div class="theme-image">
-                            <img src="./assets/vehicle.png" alt="Smart Vehicle">
+                        <!-- Tourism -->
+                        <div class="theme-card" data-theme="tourism" onclick="openThemeModal('tourism')">
+                            <div class="theme-image">
+                                <img src="./assets/tourism2.jpeg" alt="Tourism">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Tourism</h3>
+                                <p>Transform travel with smart destinations & immersive experiences.</p>
+                            </div>
                         </div>
-                        <div class="theme-content">
-                            <h3>Smart Vehicle</h3>
-                            <p>Enhance safety, efficiency, and connectivity in transportation.</p>
-                        </div>
-                    </div>
 
-                    <!-- Sustainable Energy -->
-                    <div class="theme-card" data-theme="sustainable-energy"
-                        onclick="openThemeModal('sustainable-energy')">
-                        <div class="theme-image">
-                            <img src="./assets/greentech.png" alt="Sustainable Energy">
+                        <!-- Smart Vehicle -->
+                        <div class="theme-card" data-theme="smart-vehicles" onclick="openThemeModal('smart-vehicles')">
+                            <div class="theme-image">
+                                <img src="./assets/vehicle.png" alt="Smart Vehicle">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Smart Vehicle</h3>
+                                <p>Enhance safety, efficiency, and connectivity in transportation.</p>
+                            </div>
                         </div>
-                        <div class="theme-content">
-                            <h3>Sustainable Energy</h3>
-                            <p>Sustainable solutions for resource conservation & clean energy adoption.</p>
-                        </div>
-                    </div>
 
-                    <!-- Fitness -->
-                    <div class="theme-card" data-theme="fitness" onclick="openThemeModal('fitness')">
-                        <div class="theme-image">
-                            <img src="./assets/fitness.jpg" alt="Fitness">
+                        <!-- Sustainable Energy -->
+                        <div class="theme-card" data-theme="sustainable-energy"
+                            onclick="openThemeModal('sustainable-energy')">
+                            <div class="theme-image">
+                                <img src="./assets/greentech.png" alt="Sustainable Energy">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Sustainable Energy</h3>
+                                <p>Sustainable solutions for resource conservation & clean energy adoption.</p>
+                            </div>
                         </div>
-                        <div class="theme-content">
-                            <h3>Fitness</h3>
-                            <p>Innovate health tech to encourage physical activity & well-being.</p>
-                        </div>
-                    </div>
 
-                    <!-- Med-Tech -->
-                    <div class="theme-card" data-theme="medtech" onclick="openThemeModal('medtech')">
-                        <div class="theme-image">
-                            <img src="./assets/medtech.jpg" alt="Med-Tech">
+                        <!-- Fitness -->
+                        <div class="theme-card" data-theme="fitness" onclick="openThemeModal('fitness')">
+                            <div class="theme-image">
+                                <img src="./assets/fitness.jpg" alt="Fitness">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Fitness</h3>
+                                <p>Innovate health tech to encourage physical activity & well-being.</p>
+                            </div>
                         </div>
-                        <div class="theme-content">
-                            <h3>Med-Tech</h3>
-                            <p>Improve patient care with advanced diagnostic & treatment tools.</p>
-                        </div>
-                    </div>
 
-                    <!-- Agriculture -->
-                    <div class="theme-card" data-theme="agriculture" onclick="openThemeModal('agriculture')">
-                        <div class="theme-image">
-                            <img src="./assets/agriculture.jpg" alt="Agriculture">
+                        <!-- Med-Tech -->
+                        <div class="theme-card" data-theme="medtech" onclick="openThemeModal('medtech')">
+                            <div class="theme-image">
+                                <img src="./assets/medtech.jpg" alt="Med-Tech">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Med-Tech</h3>
+                                <p>Improve patient care with advanced diagnostic & treatment tools.</p>
+                            </div>
                         </div>
-                        <div class="theme-content">
-                            <h3>Agriculture</h3>
-                            <p>Revolutionize farming for food security & precision management.</p>
-                        </div>
-                    </div>
 
-                    <!-- Green Technology -->
-                    <div class="theme-card" data-theme="green-technology" onclick="openThemeModal('green-technology')">
-                        <div class="theme-image">
-                            <img src="./assets/theme_green_tech.png" alt="Green Technology">
+                        <!-- Agriculture -->
+                        <div class="theme-card" data-theme="agriculture" onclick="openThemeModal('agriculture')">
+                            <div class="theme-image">
+                                <img src="./assets/agriculture.jpg" alt="Agriculture">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Agriculture</h3>
+                                <p>Revolutionize farming for food security & precision management.</p>
+                            </div>
                         </div>
-                        <div class="theme-content">
-                            <h3>Green Technology</h3>
-                            <p>Driving sustainability through innovative eco-friendly solutions.</p>
-                        </div>
-                    </div>
 
-                    <!-- Smart Automation -->
-                    <div class="theme-card" data-theme="smart-automation" onclick="openThemeModal('smart-automation')">
-                        <div class="theme-image">
-                            <img src="./assets/theme_smart_automation.png" alt="Smart Automation">
+                        <!-- Green Technology -->
+                        <div class="theme-card" data-theme="green-technology"
+                            onclick="openThemeModal('green-technology')">
+                            <div class="theme-image">
+                                <img src="./assets/theme_green_tech.png" alt="Green Technology">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Green Technology</h3>
+                                <p>Driving sustainability through innovative eco-friendly solutions.</p>
+                            </div>
                         </div>
-                        <div class="theme-content">
-                            <h3>Smart Automation</h3>
-                            <p>Automate everyday life with intelligent systems & IoT solutions.</p>
-                        </div>
-                    </div>
 
-                    <!-- Education -->
-                    <div class="theme-card" data-theme="education" onclick="openThemeModal('education')">
-                        <div class="theme-image">
-                            <img src="./assets/education.jpg" alt="Education">
+                        <!-- Smart Automation -->
+                        <div class="theme-card" data-theme="smart-automation"
+                            onclick="openThemeModal('smart-automation')">
+                            <div class="theme-image">
+                                <img src="./assets/theme_smart_automation.png" alt="Smart Automation">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Smart Automation</h3>
+                                <p>Automate everyday life with intelligent systems & IoT solutions.</p>
+                            </div>
                         </div>
-                        <div class="theme-content">
-                            <h3>Education</h3>
-                            <p>Enhance learning experiences with accessible tech-driven solutions.</p>
+
+                        <!-- Education -->
+                        <div class="theme-card" data-theme="education" onclick="openThemeModal('education')">
+                            <div class="theme-image">
+                                <img src="./assets/education.jpg" alt="Education">
+                            </div>
+                            <div class="theme-content">
+                                <h3>Education</h3>
+                                <p>Enhance learning experiences with accessible tech-driven solutions.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -732,6 +930,19 @@
                 closeThemeModal();
             }
         });
+
+        // ===== Category Tab Switcher =====
+        function switchThemeCategory(event, category) {
+            // Update tabs
+            document.querySelectorAll('.theme-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // Update sections
+            document.getElementById('hardware-section').style.display = category === 'hardware' ? 'block' : 'none';
+            document.getElementById('software-section').style.display = category === 'software' ? 'block' : 'none';
+        }
     </script>
 </body>
 

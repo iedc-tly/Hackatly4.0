@@ -385,6 +385,42 @@ img {
   animation: heroFadeSlideUp 1s ease-out 0.9s forwards;
 }
 
+/* Prize Pool Badge */
+.prize-pool-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 229, 195, 0.1);
+  border: 1px solid rgba(0, 229, 195, 0.4);
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  color: #00e5c3;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 0 15px rgba(0, 229, 195, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  animation: pulseGlow 2s infinite alternate, heroFadeSlideUp 1s ease-out 0.75s forwards;
+  opacity: 0;
+}
+
+.prize-pool-badge strong {
+  font-size: 1.5rem;
+  margin-left: 0.4rem;
+  color: #ffffff;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 229, 195, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(0, 229, 195, 0.6);
+  }
+}
+
 /* =========================================
    6. PHASES & CARDS
    ========================================= */
