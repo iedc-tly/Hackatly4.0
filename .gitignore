@@ -4,6 +4,4 @@ node_modules/
 .env
 
 # Data files - not tracked
-participants_data.js
-winners_data.js
 *.xlsx
