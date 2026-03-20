@@ -613,4 +613,80 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     window.addEventListener('scroll', handleLegacyScroll);
+
+    // =========================================
+    // PARTICIPANTS & WINNERS TABLE
+    // =========================================
+    const tableBody = document.getElementById('tableBody');
+    const searchInput = document.getElementById('teamSearch');
+    const noResults = document.getElementById('noResults');
+    const tabBtns = document.querySelectorAll('.tab-btn');
+
+    let currentTab = 'participants';
+
+    function getCurrentData() {
+        if (currentTab === 'participants') {
+            return (typeof participantsData !== 'undefined') ? participantsData : [];
+        } else {
+            return (typeof winnersData !== 'undefined') ? winnersData : [];
+        }
+    }
+
+    function renderTable(data) {
+        if (!tableBody) return;
+        tableBody.innerHTML = '';
+
+        if (data.length === 0) {
+            if (noResults) noResults.style.display = 'block';
+            return;
+        }
+        if (noResults) noResults.style.display = 'none';
+
+        data.forEach((item, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${index + 1}</td>
+                <td><strong>${item.team}</strong></td>
+                <td>${item.lead}</td>
+                <td>${item.college}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
+
+    function filterAndRender() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        let data = getCurrentData();
+
+        if (query) {
+            data = data.filter(item =>
+                item.team.toLowerCase().includes(query) ||
+                item.lead.toLowerCase().includes(query) ||
+                item.college.toLowerCase().includes(query)
+            );
+        }
+
+        renderTable(data);
+    }
+
+    // Tab switching
+    if (tabBtns.length > 0) {
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentTab = btn.dataset.tab;
+                if (searchInput) searchInput.value = '';
+                filterAndRender();
+            });
+        });
+    }
+
+    // Search
+    if (searchInput) {
+        searchInput.addEventListener('input', filterAndRender);
+    }
+
+    // Initial render
+    filterAndRender();
 });

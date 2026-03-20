@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Participants & Winners | Hackatly 4.0</title>
+  <script src="https://kit.fontawesome.com/854cd29b08.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" />
+  <link rel="website icon" href="assets/logo.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="participants_data.js" defer></script>
+  <script src="winners_data.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="saas-landing-page-weboceani">
+    <header class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-brand">
+          <div class="logo">
+            <a href="index.html"><img src="assets/MARK 4.png" alt="Hackatly Logo"></a>
+          </div>
+        </div>
+
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="navbar-menu">
+          <div class="navbar-link">
+            <a href="index.html" class="navlink">Home</a>
+          </div>
+          <div class="navbar-link">
+            <a href="about.html" class="navlink">About</a>
+          </div>
+          <div class="navbar-link">
+            <a href="themes.html" class="navlink">Themes</a>
+          </div>
+          <div class="navbar-link">
+            <a href="legacy.html" class="navlink">Legacy</a>
+          </div>
+          <div class="navbar-link">
+            <a href="participants.html" class="navlink active">Participants</a>
+          </div>
+          <div class="navbar-link">
+            <a href="faq.html" class="navlink">FAQ</a>
+          </div>
+          <div class="navbar-cta-mobile">
+            <a href="https://sites.google.com/view/iedcetly/home?authuser=0" class="primary-button-link">IEDC TLY</a>
+          </div>
+        </nav>
+
+        <div class="desktop-cta">
+          <button class="primary-button">
+            <div class="registor"><a href="https://sites.google.com/view/iedcetly/home?authuser=0">IEDC TLY</a></div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- PARTICIPANTS & WINNERS SECTION -->
+    <section class="page-section participants-section" id="participants">
+      <div class="container">
+        <h2 class="section-title">Participants & Phase 1 Winners</h2>
+        <p class="text-center" style="max-width: 800px; margin: 0 auto 2rem; color: var(--text-muted);">
+          Meet the brilliant teams competing in Hackatly 4.0 and the Phase 1 winners advancing to the finals.
+        </p>
+
+        <!-- Tabs -->
+        <div class="participants-tabs">
+          <button class="tab-btn active" data-tab="participants">All Participants <span
+              class="tab-count">92</span></button>
+          <button class="tab-btn" data-tab="winners">Phase 1 Winners <span class="tab-count">26</span></button>
+        </div>
+
+        <!-- Search -->
+        <div class="participants-search">
+          <div class="search-input-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="teamSearch" placeholder="Search by team name, leader, or college...">
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="participants-table-wrapper">
+          <table class="participants-table" id="participantsTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Team Name</th>
+                <th>Team Lead</th>
+                <th>College</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+          <div class="no-results" id="noResults" style="display: none;">
+            <i class="fas fa-search"></i>
+            <p>No teams found matching your search.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-container">
+        <div class="footer-col">
+          <div class="navbar-brand" style="padding-left: 0;">
+            <div class="logo">
+              <img src="assets/MARK 4.png" alt="IEDC Logo" style="height: 50px; width: auto;">
+            </div>
+            <span style="font-weight: 700; font-size: 1.2rem; margin-left: 10px;">IEDC TLY</span>
+          </div>
+          <p style="color: var(--text-muted); margin-top: 1rem;">
+            Fostering innovation and entrepreneurship at College of Engineering Thalassery.
+          </p>
+          <a href="mailto:iedc@cethalassery.ac.in" class="primary-button-link"
+            style="margin-top: 1rem; display: inline-block;">Email Us</a>
+          <a href="mailto:iedc@cethalassery.ac.in"
+            style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.85rem; display: inline-block; text-decoration: none;">iedc@cethalassery.ac.in</a>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="themes.html">Themes</a></li>
+            <li><a href="legacy.html">Legacy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <div style="color: var(--text-muted); margin-bottom: 1rem;">
+            <p><strong>Pournami E K (CEO):</strong> 8078038454</p>
+            <p><strong>Abhilash C K (COO):</strong> 9074245847</p>
+          </div>
+          <br>
+          <h3>Follow Us</h3>
+          <div class="social-links" style="display: flex; gap: 1rem;">
+            <a href="https://www.instagram.com/iedc_cetly/" target="_blank"><img src="./assets/social link (1).png"
+                alt="Instagram" style="height: 30px;"></a>
+            <a href="https://www.linkedin.com/company/iedc-tly/mycompany/" target="_blank"><img
+                src="./assets/social link (2).png" alt="LinkedIn" style="height: 30px;"></a>
+            <a href="https://www.facebook.com/iedctlylive/" target="_blank"><img src="./assets/social link (4).png"
+                alt="Facebook" style="height: 30px;"></a>
+            <a href="https://x.com/Iedctly" target="_blank"><img src="./assets/social link (5).png" alt="X"
+                style="height: 30px;"></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Location</h3>
+          <h3 style="color: var(--text-muted); margin-bottom: 0 rem;">College of Engineering Thalassery</h3>
+          <a href="https://www.google.com/maps/place/College+of+Engineering+Thalassery/@11.7827642,75.5127451,17z"
+            target="_blank"
+            style="color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+            <img src="./assets/icons8-google-maps-50.png" alt="Map" style="height: 20px;">
+            View on Map
+          </a>
+        </div>
+      </div>
+      <div
+        style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+        &copy; 2026 IEDC TLY. All rights reserved.
+      </div>
+    </footer>
+  </div>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+
+</html>
